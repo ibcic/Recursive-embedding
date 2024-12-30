@@ -1,0 +1,37 @@
+def recursive_embedding(S):
+    # Case 1: Even number of elements in S
+    if len(S) % 2 == 0:
+        while len(S) > 0:
+            # Form pairs of two pixels
+            for i in range(0, len(S), 2):
+                embed(S[i], S[i+1])  # S[i] as embedding pixel, S[i+1] as reference pixel
+            S = update_reference_pixels(S)  # Update reference pixels for the next round
+
+    # Case 2: Odd number of elements in S
+    else:
+        while len(S) > 0:
+            # Form multiple two-pixel pairs and one three-pixel group
+            for i in range(0, len(S) - 3, 2):
+                embed(S[i], S[i+1])  # Two-pixel pair: S[i] as embedding pixel, S[i+1] as reference pixel
+            
+            # Three-pixel group: use the left, right, and middle pixels
+            left = S[0]
+            right = S[-1]
+            middle = int((left + right - left // 2))  # Calculate middle pixel
+            embed(left, right, middle)  # Use middle as the reference pixel
+
+            S = update_reference_pixels(S)  # Update reference pixels for the next round
+
+# Helper function for embedding data into pixels
+def embed(embedding_pixel, reference_pixel, additional_pixel=None):
+    if additional_pixel is None:
+        # Two-pixel embedding
+        pass  # Add embedding logic here
+    else:
+        # Three-pixel embedding
+        pass  # Add embedding logic here
+
+# Helper function to update reference pixels
+def update_reference_pixels(S):
+    # Update S based on the remaining reference pixels
+    return S_next_round  # Return updated pixel list
